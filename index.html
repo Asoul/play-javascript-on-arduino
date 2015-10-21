@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>來用 JavaScript 玩 Arduino 吧！</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>來用 JavaScript 玩 Arduino 吧！</h1>
+					<a href="//asoul.github.io/play-javascript-on-arduino/">http://asoul.github.io/play-javascript-on-arduino/</a>
+					<p>
+						<small>Created by <a href="//asoul.github.io/" target="_blank">Asoul</a> @ <a href="//www.wisdomgarden.com/">WisdomGarden</a> 2015.10.22</small>
+					</p>
+				</section>
+				<section>
+					<img width="1000" data-src="/img/jsdc2015.png" style="border:none; box-shadow: none;">
+				</section>
+				<section data-transition="slide-in zoom-out">
+					<img height="600" data-src="/img/jsdc.jpg" style="border:none; box-shadow: none;">
+				</section>
+				<section data-background="/img/90F8aUepslB84.gif"></section>
+				<section data-transition="zoom-in slide-out">
+					<h1 style="font-size: 16vw;">Rock it!</h1>
+				</section>
+				<section>
+					<h2>What is Arduino?</h2>
+					<p>Arduino is an open-source electronics platform based on easy-to-use hardware and software.</p>
+					<img height="300" data-src="/img/Arduino_Logo.svg.png" style="border:none; box-shadow: none; background-color: white; padding: 20px;">
+				</section>
+				<section>
+					<img height="600" data-src="/img/ARDUINO_R3.png" style="border:none; box-shadow: none; background-color: white; padding: 20px;">
+				</section>
+				<section>
+					<h2>Why Arduino?</h2>
+					<ol>
+						<li class="fragment">Easy</li>
+						<li class="fragment">Inexpensive</li>
+						<li class="fragment">Open Source</li>
+					</ol>
+				</section>
+				<section data-background="/img/khsc.png">
+				</section>
+				<section>
+					<img height="400" data-src="/img/js.png" style="border:none; box-shadow: none; background-color: white;">
+				</section>
+				<section>
+					<h2>JavaScript on Arduino</h2>
+					<img width="800" src="/img/cylon.png" style="border:none; box-shadow: none;">
+					<img width="800" src="/img/j5.png" style="border:none; box-shadow: none;">
+				</section>
+				<section>
+					<h2>Install JonnyFive</h2>
+					<pre style="width: 500px; font-size: 30px;"><code data-trim contenteditable>
+npm install johnny-five
+					</code></pre>
+					</ol>
+				</section>
+				<section data-state="customevent">
+				<h2>It works!</h2>
+				<pre><code class="javascript" data-trim contenteditable>
+var five = require("johnny-five")
+var board = new five.Board()
+
+board.on("ready", function() {
+  var led = new five.Led(13)
+  led.blink(500)
+})
+				</code></pre>
+				</section>
+				<section>
+					<h2>PWM wave</h2>
+					<img width="800" src="/img/pwm.gif" style="border:none; box-shadow: none;">
+				</section>
+				<section>
+					<h2>PWM example</h2>
+					<pre><code class="javascript" data-trim contenteditable>
+var brightness = 0
+function controller(ch, key) {
+  if (key) {
+    if (key.name === "up") {
+      brightness += 25
+    }
+    if (key.name === "down") {
+      brightness -= 25
+    }
+    brightness = Math.max(brightness, 0)
+    brightness = Math.min(brightness, 250)
+    led.brightness(brightness)
+  }
+}
+process.stdin.on("keypress", controller)
+					</code></pre>
+				</section>
+				<section>
+					<h2>Piezo</h2>
+					<img height="400" src="/img/piezo.jpg" style="border:none; box-shadow: none;">
+				</section>
+				<section>
+					<h2>Piezo example</h2>
+<pre><code class="javascript" data-trim contenteditable>
+var piezo = new five.Piezo(3)
+piezo.play({
+  song: "C D F D A - A A A A G G G G - - C D F D G - G G G G F F F F - -",
+  beats: 1 / 4,
+  tempo: 100
+})
+</code></pre>
+				</section>
+				<section>
+					<img height="600" src="/img/iot.png" style="border:none; box-shadow: none;">
+				</section>
+				<section>
+					<h2>ESP8226</h2>
+					<img width="500" src="/img/esp8266.jpg" style="border:none; box-shadow: none;">
+				</section>
+				<section>
+					<h2>ONLY NTD$ 200</h2>
+					<img width="1000" src="/img/esp8266-buy.png" style="border:none; box-shadow: none;">
+				</section>
+				<section>
+					<h2>Sensor anywhere</h2>
+					<ul>
+						<li>Temperature</li>
+						<li>Humidity</li>
+						<li>Light</li>
+						<li>Sound</li>
+						<li>...</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Learn once, use everywhere</h2>
+					<img height="400" data-src="/img/js.png" style="border:none; box-shadow: none; background-color: white;">
+				</section>
+				<section>
+					<h2>Reference</h2>
+					<ul>
+						<li><a href="http://johnny-five.io/">http://johnny-five.io/</a></li>
+						<li><a href="https://www.arduino.cc/">https://www.arduino.cc/</a></li>
+					</ul>
+				</section>
+				<section>
+					<h1>Thank you!</h1>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+			Reveal.configure({
+			  keyboard: {
+			    13: 'next', // go to the next slide when the ENTER key is pressed
+			  }
+			});
+
+			Reveal.addEventListener( 'customevent', function() {
+				console.log( '"customevent" has fired' );
+			});
+
+		</script>
+
+	</body>
+</html>
